@@ -1,2 +1,2 @@
 # Requirements
-pip install python-uinput
+apt-get install xautomation
