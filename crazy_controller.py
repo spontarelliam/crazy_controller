@@ -33,6 +33,7 @@ def move_servo():
     x = random.randrange(100)
     pwm.start(x)
     time.sleep(0.1)
+    
 
 def main():
     while True:                                     
