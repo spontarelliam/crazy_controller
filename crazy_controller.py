@@ -12,7 +12,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo_pin, GPIO.OUT)
 pwm = GPIO.PWM(servo_pin, 50)
  
-def RCtime (RCpin):
+def read_light_sensor (RCpin):
     reading = 0
     GPIO.setup(RCpin, GPIO.OUT)
     GPIO.output(RCpin, GPIO.LOW)
@@ -29,12 +29,15 @@ def RCtime (RCpin):
     return reading
 
 
+def move_servo():
+    x = random.randrange(100)
+    pwm.start(x)
+    time.sleep(0.1)
+
 def main():
     while True:                                     
-        RCtime(light_sensor_pin)     # Read RC timing using pin #18
-        x = random.randrange(100)
-    	pwm.start(x)
-    	time.sleep(0.1)
+        read_light_sensor(light_sensor_pin)     # Read RC timing using pin #18
+        move_servo()
     
 if __name__ == '__main__':
     main()
