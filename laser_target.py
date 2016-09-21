@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # RVA Makerfest RetroPi controller
-# Adam, Justin
+# Laser target button
+# Adam
  
 import RPi.GPIO as GPIO, time, os
 import random
@@ -9,6 +10,7 @@ from subprocess import Popen, PIPE
 light_sensor_pin = 18
 servo_pin = 12
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo_pin, GPIO.OUT)
 pwm = GPIO.PWM(servo_pin, 50)
@@ -68,10 +70,9 @@ def move_servo():
     pwm.start(x)
     time.sleep(0.1)
 
-
 def main():
     while True:                                     
-        read_light_sensor(light_sensor_pin)     # Read RC timing using pin #18
+        read_light_sensor(light_sensor_pin)
         move_servo()
     
 if __name__ == '__main__':
