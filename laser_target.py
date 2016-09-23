@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO, time, os
 import random
 from subprocess import Popen, PIPE
 
-F_PIN = 3
+F_PIN = 10
 
 light_sensor_pin = 18
 servo_pin = 12
@@ -32,8 +32,6 @@ def read_light_sensor (RCpin):
         reading += 1
 
     if reading < 300:
-        # print('laser hit')
-        # device.emit_click(uinput.KEY_U)
         GPIO.output(F_PIN, 0)
         time.sleep(0.1)
         GPIO.output(F_PIN, 1)
@@ -46,7 +44,7 @@ def move_servo():
 def main():
     while True:                                     
         read_light_sensor(light_sensor_pin)
-        # move_servo()
+        move_servo()
     
 if __name__ == '__main__':
     main()

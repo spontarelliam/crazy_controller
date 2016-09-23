@@ -4,12 +4,12 @@ from subprocess import Popen, PIPE
 import os
 
 RPM_SAMPLE_TIME_S = 1
-HE_SENSOR_PIN = 2
+HE_SENSOR_PIN = 22
 G_PIN = 4
 
 GPIO.setmode( GPIO.BCM )
-GPIO.setup( HE_SENSOR_PIN, GPIO.IN )
-GPIO.setup( G_PIN, GPIO.OUT )
+GPIO.setup(HE_SENSOR_PIN, GPIO.IN )
+GPIO.setup(G_PIN, GPIO.OUT )
 GPIO.output(G_PIN, 1)
 
 GPIO.add_event_detect( HE_SENSOR_PIN, GPIO.FALLING )
@@ -20,7 +20,7 @@ def accelerate(cycles, rpm):
     """
     for i in range(cycles):
         GPIO.output(G_PIN, 0)
-        time.sleep(0.4)
+        time.sleep(0.2)
         GPIO.output(G_PIN, 1)
 
 fTime = 0.0
