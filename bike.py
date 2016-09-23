@@ -1,31 +1,27 @@
 import time
 import RPi.GPIO as GPIO
 from subprocess import Popen, PIPE
+import os
 
 RPM_SAMPLE_TIME_S = 1
 HE_SENSOR_PIN = 2
+G_PIN = 4
 
 GPIO.setmode( GPIO.BCM )
 GPIO.setup( HE_SENSOR_PIN, GPIO.IN )
+GPIO.setup( G_PIN, GPIO.OUT )
+GPIO.output(G_PIN, 1)
 
 GPIO.add_event_detect( HE_SENSOR_PIN, GPIO.FALLING )
-
-go = '''keydown Shift_L
-key Y
-keyup Shift_L
-'''
-
-def keypress(sequence):
-    p = Popen(['xte'], stdin=PIPE)
-    p.communicate(input=sequence)
         
 def accelerate(cycles, rpm):
     """
     tap accelerate in proportion to the measured rpm
     """
-    print(cycles)
     for i in range(cycles):
-        keypress(go)
+        GPIO.output(G_PIN, 0)
+        time.sleep(0.4)
+        GPIO.output(G_PIN, 1)
 
 fTime = 0.0
 iCycles = 0
