@@ -7,7 +7,8 @@ import RPi.GPIO as GPIO, time, os
 import random
 from subprocess import Popen, PIPE
 
-F_PIN = 10
+F_PIN = 14
+G_PIN = 4
 
 light_sensor_pin = 18
 servo_pin = 12
@@ -15,7 +16,9 @@ servo_pin = 12
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo_pin, GPIO.OUT)
-GPIO.setup( F_PIN, GPIO.OUT )
+GPIO.setup(F_PIN, GPIO.OUT )
+GPIO.output(F_PIN, 1)
+GPIO.output(G_PIN, 1)
 pwm = GPIO.PWM(servo_pin, 50)
 
 
